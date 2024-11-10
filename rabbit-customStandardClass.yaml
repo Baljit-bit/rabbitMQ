@@ -1,0 +1,6 @@
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: standard
+provisioner: kubernetes.io/no-provisioner  # This is important for static provisioning. If you're using local storage and the kubernetes.io/no-provisioner provisioner in your StorageClass, Kubernetes will not automatically create PVs. In dynamic provisioning, Kubernetes automatically creates the PersistentVolume (PV) when a PersistentVolumeClaim (PVC) is created. This is typically used with cloud storage providers (e.g., AWS EBS, Google Persistent Disks, etc.). When you create a PVC, Kubernetes will automatically provision the storage volume according to the StorageClass parameters (e.g., using a cloud provider's provisioner like kubernetes.io/aws-ebs).
+volumeBindingMode: WaitForFirstConsumer  # Volumes are bound only when consumed by a pod
